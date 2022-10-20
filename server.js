@@ -43,16 +43,11 @@ app.post('/register', (req, res) => {
             return;
         }
     });
-
-
-    fs.open(__dirname+'myDB.txt', 'w', function (err, file) {
-
+    
+    fs.appendFile('myDB.txt', username + ',' + password + '\n', function (err) {
         if (err) throw err;
-        fs.appendFile(__dirname+'myDB.txt', username + ',' + password + '\n', function (err) {
-            if (err) throw err;
-            console.log('Saved!');
-            return res.json({ msg: 'Account created successfully' });
-        });
+        console.log('Saved!');
+        return res.json({ msg: 'Account created successfully' });
     });
 });
 
